@@ -3,13 +3,11 @@ set -euo pipefail
 
 cd /workspaces/pymovements
 
-# Initialize a virtual environment inside your workspace container 
-# This eliminates the "site-packages is not writeable" warning entirely
+# Initialize workspace venv
 uv venv .venv
 source .venv/bin/activate
 
-# Use uv instead of pip for lightning-fast concurrent downloads
-uv pip install --upgrade pip
+# Lightning-fast installation using pre-cached wheels from /root/.cache/uv
 uv pip install -e ".[dev,docs]"
 
 if [ -f .pre-commit-config.yaml ]; then

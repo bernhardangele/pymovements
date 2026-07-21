@@ -1,12 +1,19 @@
 {
-  "name": "pymovements (Python + R + Node24)",
+  "name": "pymovements (Python + R + Node24 + OpenCode)",
   "build": {
     "dockerfile": "Dockerfile",
     "context": "..",
     "args": {
-      "CRAN_SNAPSHOT": "https://packagemanager.posit.co/cran/2026-06-24"
+      "CRAN_SNAPSHOT": "https://packagemanager.posit.co/cran/__linux__/bookworm/2026-07-20"
     }
   },
+  "runArgs": [
+    "--env-file", "${localEnv:HOME}/.config/opencode/.env"
+  ],
+  "mounts": [
+    "source=pymovements-uv-cache,target=/root/.cache/uv,type=volume",
+    "source=${localEnv:HOME}/.config/opencode/opencode.json,target=/home/vscode/.config/opencode/opencode.json,type=bind,readonly"
+  ],
   "remoteUser": "vscode",
   "workspaceFolder": "/workspaces/pymovements",
   "customizations": {
